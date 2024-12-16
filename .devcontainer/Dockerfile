@@ -1,5 +1,5 @@
 # Usa una imagen base de Debian (bullseye) con OpenJDK
-ARG VARIANT=1-bullseye
+ARG VARIANT=17-bullseye
 FROM mcr.microsoft.com/vscode/devcontainers/base:0-${VARIANT}
 
 ARG JAVA_VERSION=17
