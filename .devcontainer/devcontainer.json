@@ -1,0 +1,38 @@
+{
+	"name": "Java & PostgreSQL",
+	"dockerComposeFile": "docker-compose.yaml",
+	"service": "app",
+	"workspaceFolder": "/workspace",
+
+	"customizations": {
+		"vscode": {
+			"settings": { 
+				"java.home": "/usr/lib/jvm/java-17-openjdk", 
+				"java.configuration.checkProjectSettingsExclusions": false,
+				"java.import.gradle.enabled": true,
+				"java.import.maven.enabled": true
+			},
+
+			"extensions": [
+				"redhat.java",
+				"vscjava.vscode-java-debug",
+				"vscjava.vscode-java-test",
+				"vscjava.vscode-maven",
+				"vscjava.vscode-gradle",
+				"GitHub.copilot",
+				"GitHub.copilot-chat",
+				"ms-azuretools.vscode-docker",
+				"ms-vsliveshare.vsliveshare"
+			]
+		}
+	},
+
+	"forwardPorts": [5432],
+
+	"postCreateCommand": [
+		"java -version",
+		"mvn --version"
+    ],
+
+	"remoteUser": "vscode"
+}
