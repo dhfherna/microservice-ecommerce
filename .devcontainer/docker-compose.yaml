@@ -10,7 +10,7 @@ services:
       dockerfile: Dockerfile
       args:
         # Versión del sistema base, ajustable según necesidades.
-        VARIANT: 1-bullseye
+        VARIANT: 17-bullseye
         JAVA_VERSION: 17
     env_file:
       # Variables de entorno para la aplicación.
