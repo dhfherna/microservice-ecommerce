@@ -1,0 +1,39 @@
+version: '3.8'
+
+volumes:
+  postgres-data:
+
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Versión del sistema base, ajustable según necesidades.
+        VARIANT: 1-bullseye
+        JAVA_VERSION: 17
+    env_file:
+      # Variables de entorno para la aplicación.
+      - .env
+
+    volumes:
+      - ..:/workspace:cached
+    # Mantiene el contenedor en ejecución.
+    command: sleep infinity
+    # Ejecuta la aplicación en la misma red que la base de datos.
+    network_mode: service:db
+
+    # Opcional: Configura el usuario como "vscode" para procesos no root.
+    user: vscode
+
+  db:
+    image: postgres:latest
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    env_file:
+      # Variables de entorno de la base de datos (credenciales y configuración).
+      - .env
+    command: ["postgres"]
+    # Configura el puerto 5432 para PostgreSQL en devcontainer.json.
